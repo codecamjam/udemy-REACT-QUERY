@@ -1,11 +1,11 @@
-import { useState } from "react";
-
-import { PostDetail } from "./PostDetail";
+import { useState } from 'react';
+import { useQuery } from 'react-query';
+import { PostDetail } from './PostDetail';
 const maxPostPage = 10;
 
 async function fetchPosts() {
   const response = await fetch(
-    "https://jsonplaceholder.typicode.com/posts?_limit=10&_page=0"
+    'https://jsonplaceholder.typicode.com/posts?_limit=10&_page=0'
   );
   return response.json();
 }
@@ -14,8 +14,9 @@ export function Posts() {
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedPost, setSelectedPost] = useState(null);
 
-  // replace with useQuery
-  const data = [];
+  //query key, query function,
+  const { data } = useQuery('posts', fetchPosts);
+  if (!data) return <div></div>;
 
   return (
     <>

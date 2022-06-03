@@ -27,7 +27,7 @@ export function Posts() {
   }, [currentPage, queryClient]);
 
   //query key, query function,
-  const { data, isError, error, isLoading } = useQuery(
+  const { data, isError, error, isLoading, isFetching } = useQuery(
     ['posts', currentPage],
     () => fetchPosts(currentPage),
     {
@@ -35,7 +35,7 @@ export function Posts() {
       keepPreviousData: true,
     }
   );
-  if (isLoading) return <h3>Loading...</h3>;
+  if (isFetching) return <h3>Loading...</h3>;
   if (isError) {
     return (
       <>

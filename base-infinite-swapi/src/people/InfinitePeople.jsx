@@ -9,7 +9,7 @@ const fetchUrl = async (url) => {
 };
 
 export function InfinitePeople() {
-  const { data, fetchNextPage, hasNextPage, isLoading, isFetching } =
+  const { data, fetchNextPage, hasNextPage, isLoading, isFetching, isError } =
     useInfiniteQuery(
       'sw-people',
       ({ pageParam = initialUrl }) => fetchUrl(pageParam),
@@ -19,7 +19,7 @@ export function InfinitePeople() {
     );
 
   if (isLoading) return <div className="loading">Loading...</div>;
-  if (isLoading) return <div className="error">Error...</div>;
+  if (isError) return <div className="error">Error...</div>;
 
   return (
     <>

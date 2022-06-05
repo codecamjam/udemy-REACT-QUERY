@@ -17,5 +17,18 @@ export function InfinitePeople() {
     }
   );
 
-  return <InfiniteScroll />;
+  return (
+    <InfiniteScroll loadMore={fetchNextPage} hasMore={hasNextPage}>
+      {data.pages.map((pageData) =>
+        pageData.results.map((person) => (
+          <Person
+            key={person.name}
+            name={person.name}
+            hairColor={person.hair_color}
+            eyeColor={person.eye_color}
+          />
+        ))
+      )}
+    </InfiniteScroll>
+  );
 }
